@@ -1,0 +1,3 @@
+### Get
+GET https://api.nytimes.com/svc/topstories/v2/fashion.json?api-key=hviszdbnsT450nmR2KgODGg97mwsOcWx
+Accept: application/json
