@@ -1,0 +1,89 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My First API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/ny-times/index": {
+            "get": {
+                "tags": [
+                    "news"
+                ],
+                "summary": "Get list of NyTimes News",
+                "description": "Returns list of News",
+                "operationId": "indexNYtimes",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security_example": []
+                    }
+                ]
+            }
+        },
+        "/api/ny-times/show/{id}": {
+            "get": {
+                "tags": [
+                    "news"
+                ],
+                "summary": "Get Specific NyTimes Article",
+                "description": "Get Article By ID",
+                "operationId": "indexNYtimesShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Article id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security_example": []
+                    }
+                ]
+            }
+        },
+        "/api/news-api/index": {
+            "get": {
+                "tags": [
+                    "news"
+                ],
+                "summary": "Get list of News-api News",
+                "description": "Returns list of News",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security_example": []
+                    }
+                ]
+            }
+        }
+    }
+}

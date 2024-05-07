@@ -3,14 +3,15 @@
 namespace App\Services\news\NewsAPI;
 
 use App\Interface\NewsRepositoryInterface;
+use Illuminate\Http\Request;
 
 class NewsApiRepository implements NewsRepositoryInterface
 {
 
-    public function get()
+    public static function get(Request $request)
     {
         // TODO: Implement get() method.
-        dd(2);
+//        dd(2);
     }
 
     public function getById(string $id)
@@ -18,7 +19,7 @@ class NewsApiRepository implements NewsRepositoryInterface
         // TODO: Implement getById() method.
     }
 
-    public function create(array $data)
+    public static function create(array $data)
     {
         // TODO: Implement create() method.
     }
