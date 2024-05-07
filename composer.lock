@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7bd2bc0d185ace1902a6a69ef482709c",
+    "content-hash": "25b7f8bf3f23697be4f8c45576b5576f",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2965,6 +2965,67 @@
                 "source": "https://github.com/antonioribeiro/google2fa/tree/v8.0.1"
             },
             "time": "2022-06-13T21:57:56+00:00"
+        },
+        {
+            "name": "predis/predis",
+            "version": "v2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/predis/predis.git",
+                "reference": "b1d3255ed9ad4d7254f9f9bba386c99f4bb983d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/predis/predis/zipball/b1d3255ed9ad4d7254f9f9bba386c99f4bb983d1",
+                "reference": "b1d3255ed9ad4d7254f9f9bba386c99f4bb983d1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.3",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^8.0 || ~9.4.4"
+            },
+            "suggest": {
+                "ext-relay": "Faster connection with in-memory caching (>=0.6.2)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Till Krüss",
+                    "homepage": "https://till.im",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A flexible and feature-complete Redis client for PHP.",
+            "homepage": "http://github.com/predis/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "support": {
+                "issues": "https://github.com/predis/predis/issues",
+                "source": "https://github.com/predis/predis/tree/v2.2.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/tillkruss",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-09-13T16:42:03+00:00"
         },
         {
             "name": "psr/clock",
@@ -5980,6 +6041,73 @@
                 }
             ],
             "time": "2024-04-18T09:29:19+00:00"
+        },
+        {
+            "name": "thejano/laravel-domain-driven-design",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thejano/laravel-domain-driven-design.git",
+                "reference": "8e5b9a7d35e06775992af84ffd625faae0e4a309"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thejano/laravel-domain-driven-design/zipball/8e5b9a7d35e06775992af84ffd625faae0e4a309",
+                "reference": "8e5b9a7d35e06775992af84ffd625faae0e4a309",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^10.0|^11.0",
+                "php": "^8.1|^8.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.6",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TheJano\\LaravelDomainDrivenDesign\\LaravelDomainDrivenDesignServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TheJano\\LaravelDomainDrivenDesign\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dr Pshtiwan",
+                    "email": "drpshtiwan@thejano.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Helps to use domain driven design within laravel",
+            "homepage": "https://github.com/thejano/laravel-domain-driven-design",
+            "keywords": [
+                "Domain Driven Design",
+                "TheJano",
+                "dd",
+                "ddd",
+                "design",
+                "domain",
+                "domain-driven-design",
+                "drivem",
+                "laravel",
+                "laravel ddd",
+                "laravel-domain-driven-design"
+            ],
+            "support": {
+                "issues": "https://github.com/thejano/laravel-domain-driven-design/issues",
+                "source": "https://github.com/thejano/laravel-domain-driven-design/tree/1.1.0"
+            },
+            "time": "2024-03-20T13:26:08+00:00"
         },
         {
             "name": "tightenco/ziggy",
@@ -9632,5 +9760,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.2.0"
 }
