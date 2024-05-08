@@ -17,8 +17,10 @@ return new class extends Migration
             $table->timestamp('published_at');
             $table->string('image_url');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
+            $table->text('content')->nullable();
             $table->string('url');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
