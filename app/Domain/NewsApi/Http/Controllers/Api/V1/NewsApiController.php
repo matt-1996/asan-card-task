@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 
 /**
- * @OA\Info(title="My First API", version="0.1")
+ * @OA\Info(title="News Api", version="0.1")
  */
 class NewsApiController extends Controller
 {
@@ -18,7 +18,7 @@ class NewsApiController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/news-api/index",
+     *      path="/api/news-api/index?source=News Api&paginate=10&start_date=2024-05-01&end_date=2024-05-10",
      *      operationId="index",
      *      tags={"news"},
      *      summary="Get list of News-api News",
