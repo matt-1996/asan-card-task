@@ -2,41 +2,17 @@
 
 namespace App\Services\news\NyTimes;
 
+use App\Events\GetNews;
 use App\Interface\NewsRepositoryInterface;
 use App\Models\Article;
+use App\Services\news\BaseRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
-class NYTimesNewsRepository implements NewsRepositoryInterface
+class NYTimesNewsRepository extends BaseRepository implements NewsRepositoryInterface
 {
-
-    public static function get(Request $request)
-    {
-       $articles = collect(Cache::store('redis')->get('articles'));
-
-       return $articles->take($request->paginate ?? 10)
-           ->whereBetween('published_at', [Carbon::createFromDate($request->start_date . '00:00')
-               , Carbon::createFromDate($request->end_date . "23:59")])
-           ->when($request->source , function ($query) use ($request) {
-               return $query->where('source' , $request->source);
-           });
-    }
-
-    public function getById(string $id)
-    {
-        if(Cache::store('redis')->get("article_$id")){
-            return Cache::store('redis')->get("article_$id");
-        }else{
-            $article = Article::findOrFail($id);
-
-            Cache::store('redis')->put('article_$id', $article);
-
-            return $article;
-        }
-    }
-
-    public static function create(array $data)
+    public static function create(array $data) : Void
     {
         $article = Article::on('mysql')->create([
             'title' => $data['title'],
@@ -49,18 +25,19 @@ class NYTimesNewsRepository implements NewsRepositoryInterface
             'source' => 'New York Times',
         ]);
 
-        Cache::store('redis')->put("article_$article->id" , $article , 6000000000);
 
-        Cache::store('redis')->put('articles' , Article::all() , 6000000000);
+        Cache::store('redis')->put("article_$article->id" , $article , config('cache.redis_ttl'));
+
+        Cache::store('redis')->put('articles' , Article::all() , config('cache.redis_ttl'));
 
     }
 
-    public function update(array $data): bool
+    public function update(array $data): Void
     {
         // TODO: Implement update() method.
     }
 
-    public function destroy(string $id): bool
+    public function destroy(string $id): Void
     {
         // TODO: Implement destroy() method.
     }
