@@ -2,21 +2,25 @@
 
 namespace App\Jobs;
 
+use App\Events\GetNews;
 use App\Models\Article;
 use App\Services\HttpRequest\CustomRequest;
 use App\Services\news\NewsAPI\NewsApiRepository;
 use App\Services\news\NyTimes\NYTimesNewsRepository;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 
 class GetTopStories implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
 
     /**
      * Create a new job instance.
@@ -44,5 +48,11 @@ class GetTopStories implements ShouldQueue
         foreach ($response['results'] as $res) {
             NYTimesNewsRepository::create($res);
         }
+    }
+
+    public function uniqueVia(): Repository
+    {
+        return
+            Cache::driver('redis');
     }
 }
