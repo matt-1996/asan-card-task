@@ -17,6 +17,8 @@ return [
 
     'default' => env('CACHE_STORE', 'redis'),
 
+    'redis_ttl' => env('CACHE_REDIS_TTL', 60),
+
     /*
     |--------------------------------------------------------------------------
     | Cache Stores
