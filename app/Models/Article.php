@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Article extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -20,7 +21,7 @@ class Article extends Model
         'published_at',
         'image_url',
         'url',
-        'source'
+        'source',
     ];
 
     public static function boot() {
