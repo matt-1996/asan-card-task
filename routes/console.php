@@ -1,8 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+
+Schedule::call(function(){
+    \App\Jobs\GetTopStories::dispatch()->onQueue('NYTimes')->onConnection('redis');
+    \App\Jobs\GetNewsApiArticles::dispatch()->onQueue('NewsApi')->onConnection('redis');
+})->everyMinute();
+
+
+Schedule::command('php artisan queue:retry all')->everyMinute();
