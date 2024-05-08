@@ -5,6 +5,7 @@ namespace App\Domain\NYTimes\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Interface\NewsRepositoryInterface;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 
 class NYTimesController extends Controller
@@ -16,7 +17,7 @@ class NYTimesController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/ny-times/index",
+     *      path="/api/ny-times/index?source=New York Times&paginate=10&start_date=2024-05-01&end_date=2024-05-10",
      *      operationId="indexNYtimes",
      *      tags={"news"},
      *      summary="Get list of NyTimes News",
@@ -34,7 +35,7 @@ class NYTimesController extends Controller
      * Returns list of News
      */
     public function index(Request $request){
-        return $this->repository->get($request);
+        return $this->setData($this->repository->get($request))->response() ;
     }
 
     /**
@@ -68,5 +69,9 @@ class NYTimesController extends Controller
      */
     public function show($id){
         return $this->repository->getById($id);
+    }
+
+    public function showVue(String $id){
+        return Inertia::render('SingleNews', ['id' => $id]);
     }
 }
