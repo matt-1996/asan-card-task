@@ -33,6 +33,7 @@ class GetNewsApiArticles implements ShouldQueue
     public function handle(): void
     {
         $response = CustomRequest::get(config('news.newsApi.urls.everything') . "?q=bitcoin&apiKey=" . $this->apiKey
+            . '&pageSize=10'
             , config('proxy.http')
             , ['Accept' => 'application/json']);
 
