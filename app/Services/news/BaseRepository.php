@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Cache;
 
 class BaseRepository
 {
+
+    protected static string $source;
+
+    protected static bool $duplicated;
     public static function get(Request $request) : Collection
     {
         $articles = collect(Cache::store('redis')->get('articles'));
@@ -40,6 +44,16 @@ class BaseRepository
 
             return $article;
         }
+    }
+
+    public static function getLastUpdatedAt(): String
+    {
+        return Cache::store('redis')->get('lastUpdatedAt');
+    }
+
+    public static function setLastUpdatedAt(string $date): void
+    {
+        Cache::store('redis')->put("lastUpdatedAt" , $date, config('cache.redis_ttl'));
     }
 
 }
