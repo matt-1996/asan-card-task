@@ -1,0 +1,62 @@
+version: "3.8"
+services:
+  app:
+    container_name: news_app
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    expose:
+      - 9001
+    volumes:
+      - .:/usr/src/app
+      - ./public:/usr/src/app/public
+    networks:
+      - test_network
+
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    volumes:
+    - ./public:/usr/src/app/public
+    ports:
+      - 8001:8001
+    depends_on:
+      - app
+    environment:
+      NGINX_FPM_HOST: app
+      NGINX_ROOT: /usr/src/app/public
+    networks:
+      - test_network
+  db:
+    container_name: db
+    image: mysql:8.0.20
+    restart: always
+    volumes:
+      - ./storage/db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    cap_add:
+      - SYS_NICE
+    environment:
+      MYSQL_DATABASE: news
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      - test_network
+
+  redis:
+      container_name: redis
+      image: redis:latest
+      ports:
+        - 6380:6380
+      networks:
+        - test_network
+
+networks:
+  test_network:
+    external: true
+
+
