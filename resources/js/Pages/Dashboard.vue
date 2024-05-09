@@ -25,8 +25,11 @@ const fetchArticles = () => {
         }})
         .then(res => {
             data.value = res.data
+            console.log(res)
         })
 }
+
+fetchArticles()
 
 window.Echo.channel('news')
     .listen('GetNews', (event) => {
