@@ -7,3 +7,5 @@ Route::get('index' , [NyTimesController::class, 'index'])->middleware([]);
 
 Route::get('show/{id}' , [NyTimesController::class, 'show'])->middleware([]);
 
+Route::get('lastUpdatedAt' , [NyTimesController::class, 'lastUpdatedAt'])->middleware([]);
+
