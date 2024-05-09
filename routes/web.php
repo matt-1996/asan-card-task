@@ -1,8 +1,13 @@
 <?php
 
+use App\Events\GetNews;
+use App\Services\HttpRequest\CustomRequest;
+use App\Services\news\NewsAPI\NewsApiRepository;
+use App\Services\news\NyTimes\NYTimesNewsRepository;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use App\Domain\NYTimes\Http\Controllers\Api\V1\NYTimesController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -14,6 +19,11 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('news/{id}' , [NYTimesController::class , 'showVue'])
+    ->middleware(['web'])
+    ->name('news.single');
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -24,41 +34,3 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('run', function(){
-   \App\Jobs\GetTopStories::dispatch();
-
-//    $response = Http::withOptions([
-//        'proxy' => 'http://127.0.0.1:2081',
-//    ])
-//        ->withHeaders([
-//            'Accept' => 'application/json'
-//        ])
-//        ->get("https://api.nytimes.com/svc/topstories/v2/fashion.json?api-key=hviszdbnsT450nmR2KgODGg97mwsOcWx");
-//
-//        $res = $response->json();
-
-//    $res = Http::getWithProxy('https://api.nytimes.com/svc/topstories/v2/fashion.json?api-key=hviszdbnsT450nmR2KgODGg97mwsOcWx'
-//        , 'http://127.0.0.1:2081',
-//        [
-//            'Accept' => 'application/json'
-//        ]
-//    );
-//
-//        dd($res);
-//
-//        foreach ($res['results'] as $item) {
-//            dd($item['title']);
-//        }
-
-//    dd(\Illuminate\Support\Facades\Cache::store('redis')->get('article'));
-
-    dd(\Illuminate\Support\Facades\Cache::get('article_*'));
-});
-
-Route::get('topStories', [\App\Domain\NewsApi\Http\Controllers\Api\V1\NewsApiController::class , 'index']);
-
-Route::get('set', function (){
-    \Illuminate\Support\Facades\Cache::store('redis')->put('name', 'kkkkk', 600);
-
-   dd(\Illuminate\Support\Facades\Cache::get('name'));
-});
