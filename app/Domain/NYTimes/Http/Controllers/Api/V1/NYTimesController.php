@@ -4,8 +4,10 @@ namespace App\Domain\NYTimes\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Interface\NewsRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 
 class NYTimesController extends Controller
@@ -67,11 +69,15 @@ class NYTimesController extends Controller
      *
      * Returns News By ID
      */
-    public function show($id){
+    public function show($id): JsonResponse{
         return $this->repository->getById($id);
     }
 
-    public function showVue(String $id){
+    public function showVue(String $id): Response{
         return Inertia::render('SingleNews', ['id' => $id]);
+    }
+
+    public function lastUpdatedAt() : JsonResponse{
+        return $this->setData($this->repository->getLastUpdatedAt() . ' UTC')->response();
     }
 }
