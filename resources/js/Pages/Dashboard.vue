@@ -14,6 +14,7 @@ const data = ref()
 const source = ref('New York Times')
 const startDate = ref(dateFormated)
 const endDate = ref(new Date().toISOString().substr(0,10))
+const lastUpdatedAt = ref()
 
 const fetchArticles = () => {
     axios.get(import.meta.env.BASE_URL +
@@ -25,11 +26,18 @@ const fetchArticles = () => {
         }})
         .then(res => {
             data.value = res.data
-            console.log(res)
+        })
+}
+
+const getLastUpdatedAt = () => {
+    axios.get(import.meta.env.BASE_URL + 'api/ny-times/lastUpdatedAt')
+        .then(res => {
+            lastUpdatedAt.value = res.data.data
         })
 }
 
 fetchArticles()
+getLastUpdatedAt()
 
 window.Echo.channel('news')
     .listen('GetNews', (event) => {
@@ -108,6 +116,12 @@ watch([startDate, endDate, source], function(){
                         </v-row>
                     </v-container>
                 </v-form>
+
+                <v-row>
+                    <v-col v-if="lastUpdatedAt">
+                        last updated at: {{new Date(lastUpdatedAt).toDateString()}}
+                    </v-col>
+                </v-row>
                 <div>
                     <v-icon
                         color="green-darken-2"
