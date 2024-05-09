@@ -17,4 +17,10 @@ interface NewsRepositoryInterface
 
     public function destroy(string $id) : Void;
 
+    public static function getLastUpdatedAt() : String;
+
+    public static function setLastUpdatedAt(string $date) : Void;
+
+    public static function preventDuplicated($data) : Void;
+
 }

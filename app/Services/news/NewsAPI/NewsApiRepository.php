@@ -14,6 +14,9 @@ use phpDocumentor\Reflection\Types\Void_;
 class NewsApiRepository extends BaseRepository implements NewsRepositoryInterface
 {
 
+    protected static string $source = 'News Api';
+
+    protected static bool $duplicated = false;
     public static function create(array $data): Void
     {
         $article = Article::create([
@@ -40,5 +43,12 @@ class NewsApiRepository extends BaseRepository implements NewsRepositoryInterfac
     public function destroy(string $id): Void
     {
         // TODO: Implement destroy() method.
+    }
+
+    public static function preventDuplicated($data): void
+    {
+        if(Article::where('title' , $data['title'])->where('source' ,  self::$source)->exists()){
+            self::$duplicated = true;
+        }
     }
 }
